@@ -1,0 +1,27 @@
+@import './variables';
+
+.controler {
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  color: $light-theme-text-secondary;
+
+  &.round-border-top{
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+  }
+
+  &.dark-theme {
+    button {
+      color: $dark-theme-text-primary;
+    }
+  }
+
+  button {
+    color: $light-theme-text-secondary;
+
+    &:hover {
+      cursor: pointer;
+      color: $caution;
+    }
+  }
+}

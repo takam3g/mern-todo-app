@@ -1,0 +1,136 @@
+@import '../src/styles/variables';
+
+/* Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Nunito', sans-serif;
+  font-size: $mobile-font-size-default;
+}
+
+button {
+  font-family: 'Nunito', sans-serif;
+  background-color: transparent;
+  border: none;
+}
+
+input {
+  font-family: 'Nunito', sans-serif;
+  color: $light-theme-text-primary;
+  border: none;
+
+  &:focus {
+    outline: none;
+  }
+
+  &.dark-theme {
+    color: $dark-theme-text-primary;
+    background-color: $dark-theme-bg-secondary;
+  }
+}
+
+p {
+  margin: 0;
+}
+
+.bg-container {
+    min-height: 100vh;
+    background-image: url(./assets/bg-mobile-light.jpg);
+    background-color: $light-theme-bg;
+    background-repeat: no-repeat;
+    background-position: top, center;
+    padding: 7%;
+
+  &.dark-theme{
+    background-image: url(./assets/bg-mobile-dark.jpg);
+    background-color: $dark-theme-bg;
+  }
+}
+
+.app-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-width: 240px;
+}
+
+.loading {
+  width: 50px;
+  height: 50px;
+  align-self: center;
+}
+
+
+/* Common */
+.card {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid lightgray;
+  color: $light-theme-text-primary;
+  background-color: white;
+
+  &.dark-theme {
+    color: $dark-theme-text-primary;
+    background-color: hsl(235, 24%, 19%)
+  }
+
+  &.round-border-top{
+    border-top-left-radius: 0.5rem;
+    border-top-right-radius: 0.5rem;
+  }
+
+  .check {
+    height: 1.3rem;
+    width: 1.3rem;
+    border-radius:50%;
+    padding: 0.4em;
+    background-color: white;
+    border: solid 1px $light-theme-accent;
+  }
+}
+
+.bottom-msg {
+  display: none;
+}
+
+
+/* Desktop */
+@media screen and (min-width: $breakpoint) {
+  * {
+    font-size: $desktop-font-size-default;
+  }
+
+  .bg-container {
+    background-image: url(./assets/bg-desktop-light.jpg);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    &.dark-theme {
+      background-image: url(./assets/bg-desktop-dark.jpg);
+    }
+  }
+
+  .app-wrapper {
+    flex-grow: 1;
+    max-width: 550px;
+  }
+
+  .status-selector {
+    margin-top: 0;
+  }
+
+  .bottom-msg {
+    display: block;
+    margin-top: 2rem;
+    text-align: center;
+    color: $light-theme-text-secondary;
+  
+    &.dark-theme {
+      color: $dark-theme-text-primary;
+    }
+  }
+}

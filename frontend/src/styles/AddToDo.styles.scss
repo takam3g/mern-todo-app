@@ -1,0 +1,13 @@
+.add-todo {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+
+  input {
+    flex-grow: 1;
+    margin: 0 0.5rem;
+  }
+}

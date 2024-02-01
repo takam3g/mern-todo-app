@@ -1,0 +1,37 @@
+// Colors
+$pale-white: hsl(0, 0%, 98%);
+$soft-blue-gray: hsl(236, 33%, 92%);
+$subtle-lavender: hsl(233, 11%, 84%);
+$gentle-mint: hsl(236, 9%, 61%);
+$light-slate: hsl(235, 19%, 35%);
+$midnight-black: hsl(235, 21%, 11%);
+$deep-charcoal: hsl(235, 24%, 19%);
+$lavish-lilac: hsl(234, 39%, 85%);
+$slate-gray: hsl(234, 11%, 52%);
+
+$accent: hsl(220, 98%, 61%);
+$caution: rgb(233, 98, 60);
+
+// Light Theme
+$light-theme-bg: $pale-white;
+$light-theme-text-primary: $light-slate;
+$light-theme-text-secondary: $gentle-mint;
+$light-theme-text-tertiary: $subtle-lavender;
+$light-theme-accent: $soft-blue-gray;
+
+// Dark Theme
+$dark-theme-bg: $midnight-black;
+$dark-theme-bg-secondary: $deep-charcoal;
+$dark-theme-text-primary: $lavish-lilac;
+$dark-theme-text-secondary: $slate-gray;
+
+
+// Breakpoint
+$breakpoint: 550px;
+
+
+// Font size
+$mobile-font-size-default: 12px;
+$desktop-font-size-default: 18px;
+$mobile-font-size-header: 1.7rem;
+$desktop-font-size-header: 2.2rem;

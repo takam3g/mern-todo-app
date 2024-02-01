@@ -1,0 +1,39 @@
+@import './variables';
+
+.todo {
+  .check {
+    &.completed {
+      background: linear-gradient(to right, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+    }
+  }
+
+  input {
+    flex-grow: 1;
+    margin: 0 0.5rem;
+    background-color: $light-theme-text-tertiary;
+  }
+
+  p {
+    flex-grow: 1;
+    margin: 0 0.5rem;
+
+    &.completed {
+      text-decoration: line-through;
+      color: $light-theme-text-tertiary;
+    }
+  }
+
+  .delete {
+    width: 1rem;
+  }
+
+  &.dark-theme {
+    p {
+      &.completed {
+        color: $dark-theme-text-secondary;
+      }
+    }
+  }
+}
+
+

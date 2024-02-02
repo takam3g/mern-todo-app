@@ -1,8 +1,8 @@
 import { RequestHandler } from 'express';
+import createHttpError from 'http-errors';
 import mongoose from 'mongoose';
 
 import TodoModel from '../models/todo';
-import createHttpError from 'http-errors';
 
 export const getTodos: RequestHandler = async (req, res, next) => {
   try {

@@ -1,7 +1,8 @@
-import React, { createContext, useState, useEffect } from 'react';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 
 import { ToDo as ToDoModel } from '../models/todo';
 import { fetchToDos } from '../services/todo_api';
+import { UserContext } from '../contexts/UserContext';
 
 export enum LIST_VIEW {
   ALL = 'all',
@@ -38,6 +39,8 @@ interface ToDoProviderProps {
 }
 
 export const ToDoProvider: React.FC<ToDoProviderProps> = ({ children }) => {
+  const { user } = useContext(UserContext);
+
   const [toDoList, setToDoList] = useState<ToDoModel[]>([]);
   const [activeList, setActiveList] = useState<ToDoModel[]>(toDoList);
   const [filteredToDoList, setFilteredToDoList] =
@@ -58,7 +61,7 @@ export const ToDoProvider: React.FC<ToDoProviderProps> = ({ children }) => {
       }
     }
     loadToDos();
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     setActiveList(toDoList.filter((item) => !item.isCompleted));

@@ -1,7 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+
 import './index.css';
 import App from './App';
+import { UserProvider } from './contexts/UserContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { ToDoProvider } from './contexts/ToDoContext';
 import reportWebVitals from './reportWebVitals';
@@ -11,11 +14,15 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <ThemeProvider>
-      <ToDoProvider>
-        <App />
-      </ToDoProvider>
-    </ThemeProvider>
+    <BrowserRouter>
+      <UserProvider>
+        <ThemeProvider>
+          <ToDoProvider>
+            <App />
+          </ToDoProvider>
+        </ThemeProvider>
+      </UserProvider>
+    </BrowserRouter>
   </React.StrictMode>
 );
 

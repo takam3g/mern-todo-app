@@ -1,5 +1,6 @@
 import express from 'express';
 
+import { requiresAuth } from '../middleware/auth';
 import {
   signUp,
   signIn,
@@ -9,7 +10,7 @@ import {
 
 const router = express.Router();
 
-router.get('/', isUserAuthenticated);
+router.get('/', requiresAuth, isUserAuthenticated);
 
 router.post('/sign-up', signUp);
 

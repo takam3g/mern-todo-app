@@ -1,0 +1,45 @@
+@import './variables';
+
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: $dark-theme-bg;
+  color: $dark-theme-text-primary;
+
+  h1 {
+    font-size: $mobile-font-size-header;
+    letter-spacing: 0.5rem;
+  }
+
+  .auth-form-container {
+    margin: 2rem;
+    padding: 1.5rem;
+    border: 1px solid $dark-theme-text-secondary;
+    border-radius: 1rem;
+
+    h2 {
+      text-align: center;
+      margin-bottom: 1rem;
+      font-size: $mobile-font-size-header;
+    }
+
+    .auth-form-bottom-message {
+      margin-top: 1rem;
+
+      span {
+        color: $dark-theme-text-primary;
+        margin-left: 1rem;
+        font-weight: bold;
+
+        &:hover {
+          cursor: pointer;
+          color: $accent;
+        }
+      }
+    }
+
+  }
+}

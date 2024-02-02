@@ -1,17 +1,5 @@
 import { ToDo as ToDoModel } from '../models/todo';
-
-async function fetchData(
-  input: RequestInfo,
-  init?: RequestInit
-): Promise<Response> {
-  const response = await fetch(input, init);
-  if (!response.ok) {
-    const errorBody = await response.json();
-    const errorMessage = errorBody.error;
-    throw new Error(errorMessage);
-  }
-  return response;
-}
+import { fetchData } from './fetchUtils';
 
 export async function fetchToDos(): Promise<ToDoModel[]> {
   const response = await fetchData('/api/todos', {

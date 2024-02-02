@@ -1,0 +1,29 @@
+@import './variables';
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+
+  .submit-error {
+    align-self: center;
+    color: $caution;
+  }
+
+  button {
+    width: 50%;
+    align-self: center;
+    background-color: $light-theme-text-tertiary;
+    color: $light-theme-text-primary;
+    padding: 0.5rem 0;
+    margin: 0.5rem 0;
+    border-radius: 0.5rem;
+
+    &:hover {
+      cursor: pointer;
+      background-color: $light-theme-accent;
+    }
+  }
+
+  
+}
+

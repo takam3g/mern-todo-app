@@ -8,10 +8,6 @@ export const isUserAuthenticated: RequestHandler = async (req, res, next) => {
   const getAuthenticatedUserId = req.session.userId;
 
   try {
-    if (!getAuthenticatedUserId) {
-      throw createHttpError(401, 'Uer is not authenticated');
-    }
-
     const user = await UserModel.findById(getAuthenticatedUserId)
       .select('+email')
       .exec();
@@ -49,14 +45,11 @@ export const signUp: RequestHandler<
     const existingEmail = await UserModel.findOne({ email: email }).exec();
 
     if (existingUsername) {
-      throw createHttpError(
-        400,
-        'Username already taken. Please choose another one.'
-      );
+      throw createHttpError(409, 'Username already taken.');
     }
 
     if (existingEmail) {
-      throw createHttpError(400, 'Email already exists');
+      throw createHttpError(409, 'Email already exists');
     }
 
     const passwordHashed = await bcrypt.hash(rawPassword, 10);
@@ -100,7 +93,7 @@ export const signIn: RequestHandler<
     }
 
     const user = await UserModel.findOne({ username: username })
-      .select('+email')
+      .select('+password +email')
       .exec();
 
     if (!user) {
@@ -115,7 +108,13 @@ export const signIn: RequestHandler<
 
     req.session.userId = user._id;
 
-    res.status(201).json(user);
+    // Not to return password
+    const userToReturn = {
+      username: user.username,
+      email: user.email,
+    };
+
+    res.status(201).json(userToReturn);
   } catch (error) {
     next(error);
   }

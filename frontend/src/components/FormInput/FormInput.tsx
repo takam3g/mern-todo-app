@@ -1,6 +1,6 @@
 import React from 'react';
 
-import '../styles/FormInput.styles.scss';
+import './FormInput.scss';
 
 interface FormInputError {
   isError: boolean;

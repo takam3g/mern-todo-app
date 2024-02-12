@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 
-import '../styles/Controler.styles.scss';
+import './Controler.scss';
 
-import StatusSelector from './StatusSelector';
-import { ThemeContext } from '../contexts/ThemeContext';
-import { ToDoContext } from '../contexts/ToDoContext';
-import { deleteToDo } from '../services/todo_api';
+import StatusSelector from '../StatusSelector/StatusSelector';
+import { ThemeContext } from '../../contexts/ThemeContext';
+import { ToDoContext } from '../../contexts/ToDoContext';
+import { deleteToDo } from '../../services/todo_api';
 
 const Controler: React.FC = () => {
   const { darkTheme } = useContext(ThemeContext);

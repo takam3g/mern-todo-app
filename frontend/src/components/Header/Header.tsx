@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import '../styles/Header.styles.scss';
-import moon from '../assets/icon-moon.png';
-import sun from '../assets/icon-sun.png';
-import signout from '../assets/icon-signout.png';
-import { signOut } from '../services/user_api';
-import { ThemeContext } from '../contexts/ThemeContext';
-import { UserContext } from '../contexts/UserContext';
+import './Header.scss';
+import moon from '../../assets/icon-moon.png';
+import sun from '../../assets/icon-sun.png';
+import signout from '../../assets/icon-signout.png';
+import { signOut } from '../../services/user_api';
+import { ThemeContext } from '../../contexts/ThemeContext';
+import { UserContext } from '../../contexts/UserContext';
 
 const Header: React.FC = () => {
   const navigate = useNavigate();

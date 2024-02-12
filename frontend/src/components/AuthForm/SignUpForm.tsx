@@ -1,11 +1,14 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import '../styles/AuthForm.styles.scss';
-import FormInput from './FormInput';
-import { SignUpInput as SignUpInputModel, signUp } from '../services/user_api';
-import { UserContext } from '../contexts/UserContext';
-import { ConflictError } from '../errors/http_errors';
+import './AuthForm.scss';
+import FormInput from '../FormInput/FormInput';
+import {
+  SignUpInput as SignUpInputModel,
+  signUp,
+} from '../../services/user_api';
+import { UserContext } from '../../contexts/UserContext';
+import { ConflictError } from '../../errors/http_errors';
 
 const SignUpForm: React.FC = () => {
   const navigate = useNavigate();

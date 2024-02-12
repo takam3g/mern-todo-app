@@ -1,9 +1,9 @@
 import React, { useContext } from 'react';
 
-import '../styles/StatusSelector.styles.scss';
-import Button from './Button';
-import { ThemeContext } from '../contexts/ThemeContext';
-import { ToDoContext, LIST_VIEW } from '../contexts/ToDoContext';
+import './StatusSelector.scss';
+import Button from '../Button/Button';
+import { ThemeContext } from '../../contexts/ThemeContext';
+import { ToDoContext, LIST_VIEW } from '../../contexts/ToDoContext';
 
 interface StatusSelectorProps {
   additionalClassName?: string;

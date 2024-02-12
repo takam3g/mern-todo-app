@@ -1,12 +1,12 @@
 import React, { useContext } from 'react';
 
-import '../styles/ToDo.styles.scss';
-import loading from '../assets/icon-loading.gif';
-import { ThemeContext } from '../contexts/ThemeContext';
-import Header from '../components/Header';
-import AddToDo from '../components/AddToDo';
-import ToDoContainer from '../components/ToDoContainer';
-import { ToDoContext } from '../contexts/ToDoContext';
+import './ToDo.scss';
+import loading from '../../assets/icon-loading.gif';
+import { ThemeContext } from '../../contexts/ThemeContext';
+import Header from '../../components/Header/Header';
+import AddToDo from '../../components/AddToDo/AddToDo';
+import ToDoContainer from '../../components/ToDoContainer/ToDoContainer';
+import { ToDoContext } from '../../contexts/ToDoContext';
 
 const ToDo: React.FC = () => {
   const { darkTheme } = useContext(ThemeContext);

@@ -1,17 +1,17 @@
 import React, { useContext, useState } from 'react';
 
-import '../styles/ToDoCard.styles.scss';
-import check from '../assets/icon-check.svg';
-import cross from '../assets/icon-cross.svg';
+import './ToDoCard.scss';
+import check from '../../assets/icon-check.svg';
+import cross from '../../assets/icon-cross.svg';
 
-import { ThemeContext } from '../contexts/ThemeContext';
-import { ToDoContext } from '../contexts/ToDoContext';
-import { ToDo as ToDoModel } from '../models/todo';
+import { ThemeContext } from '../../contexts/ThemeContext';
+import { ToDoContext } from '../../contexts/ToDoContext';
+import { ToDo as ToDoModel } from '../../models/todo';
 import {
   deleteToDo,
   updateToDo,
   ToDoInput as ToDoInputModel,
-} from '../services/todo_api';
+} from '../../services/todo_api';
 
 interface ToDoCardProps {
   item: ToDoModel;

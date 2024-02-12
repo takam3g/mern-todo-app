@@ -1,8 +1,8 @@
 import { Routes, Route } from 'react-router-dom';
 
 import './App.scss';
-import Auth from './routes/Auth';
-import ToDo from './routes/ToDo';
+import Auth from './routes/Auth/Auth';
+import ToDo from './routes/ToDo/ToDo';
 
 function App() {
   return (

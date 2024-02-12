@@ -1,11 +1,14 @@
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import '../styles/AuthForm.styles.scss';
-import FormInput from './FormInput';
-import { SignInInput as SignInInputModel, signIn } from '../services/user_api';
-import { UserContext } from '../contexts/UserContext';
-import { UnauthorizedError } from '../errors/http_errors';
+import './AuthForm.scss';
+import FormInput from '../FormInput/FormInput';
+import {
+  SignInInput as SignInInputModel,
+  signIn,
+} from '../../services/user_api';
+import { UserContext } from '../../contexts/UserContext';
+import { UnauthorizedError } from '../../errors/http_errors';
 
 const SignInForm: React.FC = () => {
   const navigate = useNavigate();

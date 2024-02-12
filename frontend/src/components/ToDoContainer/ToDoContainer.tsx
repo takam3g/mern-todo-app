@@ -1,8 +1,8 @@
 import React, { useContext, useState } from 'react';
 
-import ToDoCard from './ToDoCard';
-import Controler from './Controler';
-import { ToDoContext } from '../contexts/ToDoContext';
+import ToDoCard from '../ToDoCard/ToDoCard';
+import Controler from '../Controler/Controler';
+import { ToDoContext } from '../../contexts/ToDoContext';
 
 const ToDoContainer: React.FC = () => {
   const { toDoList, setToDoList, filteredToDoList } = useContext(ToDoContext);

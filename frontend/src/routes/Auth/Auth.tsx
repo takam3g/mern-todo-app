@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
-import '../styles/Auth.scss';
-import SignInForm from '../components/SignInForm';
-import SignUpForm from '../components/SignUpForm';
+import './Auth.scss';
+import SignInForm from '../../components/AuthForm/SignInForm';
+import SignUpForm from '../../components/AuthForm/SignUpForm';
 
 const Auth: React.FC = () => {
   const [isSignUpForm, setIsSignUpForm] = useState<boolean>(false);

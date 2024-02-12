@@ -1,10 +1,13 @@
 import React, { useContext, useState } from 'react';
 
-import '../styles/AddToDo.styles.scss';
-import check from '../assets/icon-check.svg';
-import { ThemeContext } from '../contexts/ThemeContext';
-import { ToDoContext } from '../contexts/ToDoContext';
-import { ToDoInput as ToDoInputModel, createToDo } from '../services/todo_api';
+import './AddToDo.scss';
+import check from '../../assets/icon-check.svg';
+import { ThemeContext } from '../../contexts/ThemeContext';
+import { ToDoContext } from '../../contexts/ToDoContext';
+import {
+  ToDoInput as ToDoInputModel,
+  createToDo,
+} from '../../services/todo_api';
 
 const AddToDo: React.FC = () => {
   const { darkTheme } = useContext(ThemeContext);

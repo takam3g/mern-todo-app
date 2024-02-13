@@ -10,6 +10,36 @@ import {
 import { UserContext } from '../../contexts/UserContext';
 import { UnauthorizedError } from '../../errors/http_errors';
 
+interface InputError {
+  isError: boolean;
+  message: string;
+}
+
+export const validateUserInput = (
+  username: string,
+  password: string,
+  setInputError: React.Dispatch<
+    React.SetStateAction<Record<string, InputError>>
+  >
+) => {
+  // Set error if any of the required fields are empty
+  if (!username || !password) {
+    setInputError({
+      username: {
+        isError: !username ? true : false,
+        message: !username ? 'Username is required' : '',
+      },
+      password: {
+        isError: !password ? true : false,
+        message: !password ? 'Password is required' : '',
+      },
+    });
+    return false;
+  }
+
+  return true;
+};
+
 const SignInForm: React.FC = () => {
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
@@ -18,11 +48,6 @@ const SignInForm: React.FC = () => {
   const [username, setUsername] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [submitErrorText, setSubmitErrorText] = useState<string>('');
-
-  interface InputError {
-    isError: boolean;
-    message: string;
-  }
 
   const [inputError, setInputError] = useState<Record<string, InputError>>({
     username: {
@@ -35,29 +60,10 @@ const SignInForm: React.FC = () => {
     },
   });
 
-  const validateUserInput = () => {
-    // Set error if any of the required fields are empty
-    if (!username || !password) {
-      setInputError({
-        username: {
-          isError: !username ? true : false,
-          message: !username ? 'Username is required' : '',
-        },
-        password: {
-          isError: !password ? true : false,
-          message: !password ? 'Password is required' : '',
-        },
-      });
-      return false;
-    }
-
-    return true;
-  };
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (validateUserInput()) {
+    if (validateUserInput(username, password, setInputError)) {
       const signInInput: SignInInputModel = {
         username: username,
         password: password,
@@ -86,7 +92,12 @@ const SignInForm: React.FC = () => {
   };
 
   return (
-    <form className='auth-form' onSubmit={handleSubmit} noValidate>
+    <form
+      className='auth-form'
+      onSubmit={handleSubmit}
+      aria-label='form'
+      noValidate
+    >
       <FormInput
         id='username'
         labelText='Username'

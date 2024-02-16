@@ -10,6 +10,80 @@ import {
 import { UserContext } from '../../contexts/UserContext';
 import { ConflictError } from '../../errors/http_errors';
 
+interface InputError {
+  isError: boolean;
+  message: string;
+}
+
+export const validateUserInput = (
+  username: string,
+  email: string,
+  password: string,
+  confirmPassword: string,
+  setInputError: React.Dispatch<
+    React.SetStateAction<Record<string, InputError>>
+  >
+) => {
+  const isEmailValid = () => {
+    const requiredFormat = /\S+@\S+\.\S+/;
+    return requiredFormat.test(email);
+  };
+
+  // For now just setting at least 8 characters long
+  const isPasswordValid = () => {
+    const requiredFormat = /^.{8,}$/;
+    return requiredFormat.test(password);
+  };
+
+  const isConfirmPasswordMatch = () => {
+    return password === confirmPassword;
+  };
+
+  // Set error if any of the required fields are empty
+  if (
+    !username ||
+    !email ||
+    !password ||
+    !confirmPassword ||
+    !isEmailValid() ||
+    !isPasswordValid() ||
+    !isConfirmPasswordMatch()
+  ) {
+    setInputError({
+      username: {
+        isError: !username ? true : false,
+        message: !username ? 'Username is required' : '',
+      },
+      email: {
+        isError: !email ? true : !isEmailValid(),
+        message: !email
+          ? 'Email is required'
+          : !isEmailValid()
+          ? 'Email is invarid'
+          : '',
+      },
+      password: {
+        isError: !password ? true : !isPasswordValid(),
+        message: !password
+          ? 'Password is required'
+          : !isPasswordValid()
+          ? 'Password shoud be at least 8 characters'
+          : '',
+      },
+      confirmPassword: {
+        isError: !confirmPassword ? true : !isConfirmPasswordMatch(),
+        message: !confirmPassword
+          ? 'Confirm Password'
+          : !isConfirmPasswordMatch()
+          ? 'Password does not match'
+          : '',
+      },
+    });
+    return false;
+  }
+  return true;
+};
+
 const SignUpForm: React.FC = () => {
   const navigate = useNavigate();
   const { setUser } = useContext(UserContext);
@@ -20,11 +94,6 @@ const SignUpForm: React.FC = () => {
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [submitErrorText, setSubmitErrorText] = useState<string>('');
-
-  interface InputError {
-    isError: boolean;
-    message: string;
-  }
 
   const [inputError, setInputError] = useState<Record<string, InputError>>({
     username: {
@@ -45,71 +114,18 @@ const SignUpForm: React.FC = () => {
     },
   });
 
-  const validateUserInput = () => {
-    const isEmailValid = () => {
-      const requiredFormat = /\S+@\S+\.\S+/;
-      return requiredFormat.test(email);
-    };
-
-    // For now just setting at least 8 characters long
-    const isPasswordValid = () => {
-      const requiredFormat = /^.{8,}$/;
-      return requiredFormat.test(password);
-    };
-
-    const isConfirmPasswordMatch = () => {
-      return password === confirmPassword;
-    };
-
-    // Set error if any of the required fields are empty
-    if (
-      !username ||
-      !email ||
-      !password ||
-      !confirmPassword ||
-      !isEmailValid() ||
-      !isPasswordValid() ||
-      !isConfirmPasswordMatch()
-    ) {
-      setInputError({
-        username: {
-          isError: !username ? true : false,
-          message: !username ? 'Username is required' : '',
-        },
-        email: {
-          isError: !email ? true : false,
-          message: !email
-            ? 'Email is required'
-            : !isEmailValid()
-            ? 'Email is invarid'
-            : '',
-        },
-        password: {
-          isError: !password ? true : false,
-          message: !password
-            ? 'Password is required'
-            : !isEmailValid()
-            ? 'Password shoud be at least 8 characters'
-            : '',
-        },
-        confirmPassword: {
-          isError: !confirmPassword ? true : false,
-          message: !confirmPassword
-            ? 'Confirm Password'
-            : !isConfirmPasswordMatch
-            ? 'Password does not match'
-            : '',
-        },
-      });
-      return false;
-    }
-    return true;
-  };
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (validateUserInput()) {
+    const isAllFieldsValid = validateUserInput(
+      username,
+      email,
+      password,
+      confirmPassword,
+      setInputError
+    );
+
+    if (isAllFieldsValid) {
       const signUpInput: SignUpInputModel = {
         username: username,
         email: email,
@@ -140,7 +156,12 @@ const SignUpForm: React.FC = () => {
   };
 
   return (
-    <form className='auth-form' onSubmit={handleSubmit} noValidate>
+    <form
+      className='auth-form'
+      onSubmit={handleSubmit}
+      aria-label='form'
+      noValidate
+    >
       <FormInput
         id='username'
         labelText='Username'
@@ -181,7 +202,6 @@ const SignUpForm: React.FC = () => {
         onChangeHandler={(e) => setConfirmPassword(e.target.value)}
         inputError={inputError.confirmPassword}
       />
-
       <p className='submit-error'>{submitErrorText}</p>
       <button type='submit' disabled={isSubmitting}>
         Sign Up

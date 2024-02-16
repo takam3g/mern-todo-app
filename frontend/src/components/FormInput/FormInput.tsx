@@ -32,7 +32,7 @@ const FormInput: React.FC<FormInputProps> = ({
     <div className='input-contaier'>
       <div className='label-container'>
         <label htmlFor={id}>{labelText}</label>
-        <p className={inputError.isError ? 'error' : ''}>
+        <p className={inputError.isError ? 'input-error' : ''}>
           {inputError.message}
         </p>
       </div>

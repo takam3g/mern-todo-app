@@ -29,9 +29,11 @@
 https://github.com/takam3g/mern-todo-app/assets/84117994/b2098bc5-a0bc-40c2-99cf-755ae10816d4
 
 
-### Links
+### Live App
 
 https://mytodo.xyz/
+
+- Deployed on AWS EC2 with SSL and Nginx
 
 ### Built with
 

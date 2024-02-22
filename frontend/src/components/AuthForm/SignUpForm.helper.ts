@@ -44,7 +44,7 @@ export const validateUserInput = (
         message: !email
           ? 'Email is required'
           : !isEmailValid()
-          ? 'Email is invarid'
+          ? 'Email is invalid'
           : '',
       },
       password: {

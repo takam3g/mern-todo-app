@@ -5,7 +5,8 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
-import SignInForm, { validateUserInput } from './SignInForm';
+import SignInForm from './SignInForm';
+import { validateUserInput } from './SignInForm.helper';
 
 describe('SignInForm', () => {
   test('rendering fields of username and password', () => {

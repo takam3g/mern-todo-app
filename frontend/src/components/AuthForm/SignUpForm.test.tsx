@@ -5,7 +5,8 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
-import SignUpForm, { validateUserInput } from './SignUpForm';
+import SignUpForm from './SignUpForm';
+import { validateUserInput } from './SignUpForm.helper';
 
 describe('SignUpForm', () => {
   // Mock onSubmit function

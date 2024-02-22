@@ -1,11 +1,7 @@
 import React from 'react';
 
 import './FormInput.scss';
-
-interface FormInputError {
-  isError: boolean;
-  message: string;
-}
+import { FormInputError } from './FormInput.type';
 
 interface FormInputProps {
   id: string;

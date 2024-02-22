@@ -2,87 +2,15 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import './AuthForm.scss';
+import { validateUserInput } from './SignUpForm.helper';
 import FormInput from '../FormInput/FormInput';
+import { FormInputError } from '../FormInput/FormInput.type';
 import {
   SignUpInput as SignUpInputModel,
   signUp,
 } from '../../services/user_api';
 import { UserContext } from '../../contexts/UserContext';
 import { ConflictError } from '../../errors/http_errors';
-
-interface InputError {
-  isError: boolean;
-  message: string;
-}
-
-export const validateUserInput = (
-  username: string,
-  email: string,
-  password: string,
-  confirmPassword: string,
-  setInputError: React.Dispatch<
-    React.SetStateAction<Record<string, InputError>>
-  >
-) => {
-  const isEmailValid = () => {
-    const requiredFormat = /\S+@\S+\.\S+/;
-    return requiredFormat.test(email);
-  };
-
-  // For now just setting at least 8 characters long
-  const isPasswordValid = () => {
-    const requiredFormat = /^.{8,}$/;
-    return requiredFormat.test(password);
-  };
-
-  const isConfirmPasswordMatch = () => {
-    return password === confirmPassword;
-  };
-
-  // Set error if any of the required fields are empty
-  if (
-    !username ||
-    !email ||
-    !password ||
-    !confirmPassword ||
-    !isEmailValid() ||
-    !isPasswordValid() ||
-    !isConfirmPasswordMatch()
-  ) {
-    setInputError({
-      username: {
-        isError: !username ? true : false,
-        message: !username ? 'Username is required' : '',
-      },
-      email: {
-        isError: !email ? true : !isEmailValid(),
-        message: !email
-          ? 'Email is required'
-          : !isEmailValid()
-          ? 'Email is invalid'
-          : '',
-      },
-      password: {
-        isError: !password ? true : !isPasswordValid(),
-        message: !password
-          ? 'Password is required'
-          : !isPasswordValid()
-          ? 'Password shoud be at least 8 characters'
-          : '',
-      },
-      confirmPassword: {
-        isError: !confirmPassword ? true : !isConfirmPasswordMatch(),
-        message: !confirmPassword
-          ? 'Confirm Password'
-          : !isConfirmPasswordMatch()
-          ? 'Password does not match'
-          : '',
-      },
-    });
-    return false;
-  }
-  return true;
-};
 
 const SignUpForm: React.FC = () => {
   const navigate = useNavigate();
@@ -95,7 +23,7 @@ const SignUpForm: React.FC = () => {
   const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [submitErrorText, setSubmitErrorText] = useState<string>('');
 
-  const [inputError, setInputError] = useState<Record<string, InputError>>({
+  const [inputError, setInputError] = useState<Record<string, FormInputError>>({
     username: {
       isError: false,
       message: '',

@@ -2,43 +2,15 @@ import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import './AuthForm.scss';
+import { validateUserInput } from './SignInForm.helper';
 import FormInput from '../FormInput/FormInput';
+import { FormInputError } from '../FormInput/FormInput.type';
 import {
   SignInInput as SignInInputModel,
   signIn,
 } from '../../services/user_api';
 import { UserContext } from '../../contexts/UserContext';
 import { UnauthorizedError } from '../../errors/http_errors';
-
-interface InputError {
-  isError: boolean;
-  message: string;
-}
-
-export const validateUserInput = (
-  username: string,
-  password: string,
-  setInputError: React.Dispatch<
-    React.SetStateAction<Record<string, InputError>>
-  >
-) => {
-  // Set error if any of the required fields are empty
-  if (!username || !password) {
-    setInputError({
-      username: {
-        isError: !username ? true : false,
-        message: !username ? 'Username is required' : '',
-      },
-      password: {
-        isError: !password ? true : false,
-        message: !password ? 'Password is required' : '',
-      },
-    });
-    return false;
-  }
-
-  return true;
-};
 
 const SignInForm: React.FC = () => {
   const navigate = useNavigate();
@@ -49,7 +21,7 @@ const SignInForm: React.FC = () => {
   const [password, setPassword] = useState<string>('');
   const [submitErrorText, setSubmitErrorText] = useState<string>('');
 
-  const [inputError, setInputError] = useState<Record<string, InputError>>({
+  const [inputError, setInputError] = useState<Record<string, FormInputError>>({
     username: {
       isError: false,
       message: '',

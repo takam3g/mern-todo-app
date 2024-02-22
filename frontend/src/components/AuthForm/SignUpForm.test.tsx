@@ -5,7 +5,8 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
 
-import SignUpForm, { validateUserInput } from './SignUpForm';
+import SignUpForm from './SignUpForm';
+import { validateUserInput } from './SignUpForm.helper';
 
 describe('SignUpForm', () => {
   test('rendering fields of username and password', () => {
@@ -15,7 +16,6 @@ describe('SignUpForm', () => {
       </MemoryRouter>
     );
 
-    const form = screen.getByRole('form', { name: 'form' });
     const usernameInput = screen.getByLabelText(/username/i);
     const emailInput = screen.getByLabelText(/email/i);
     const passwordInput = screen.getByLabelText(/^password$/i);
